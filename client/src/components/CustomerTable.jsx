@@ -65,7 +65,7 @@ const CustomerTable = ({filtered,handleEdit, handleDelete}) => {
           </tbody>
         </table>
         {filtered.length === 0 && (
-          <p className="p-4 text-center text-slate-500">No customers found.</p>
+          <p className="p-4 text-center text-slate-500">No clients found.</p>
         )}
       </div>
     </div>

@@ -54,7 +54,7 @@ const Home = () => {
                 : "hover:text-blue-400"
             }`}
           >
-            👥 Customers
+            👥 Clients
           </button>
           <button
             onClick={() => setActivePage("calendar")}

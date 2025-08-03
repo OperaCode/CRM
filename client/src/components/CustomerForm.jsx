@@ -14,7 +14,7 @@ const CustomerForm = ({
         {/* Form Header */}
       <div className="bg-white p-6 rounded w-full max-w-md">
         <h2 className="text-xl font-semibold mb-4">
-          {editing !== null ? "Edit Customer" : "Add Customer"}
+          {editing !== null ? "Edit Client" : "Add Client"}
         </h2>
 
         {/* Create/Edit Customer Form */}
