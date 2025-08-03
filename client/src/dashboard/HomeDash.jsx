@@ -6,9 +6,9 @@ const Dashboard = ({ total, recent, active }) => {
   const recentFive = recent.slice(0, 5);
 
   return (
-    <div className="space-y-10 px-4 md:px-6">
+    <div className="space-y-10 px-4 md:px-6 ">
       {/* Overview Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 bg-blue-50 p-4">
         <div className="bg-gradient-to-tr from-indigo-50 to-indigo-100 p-5 rounded-2xl shadow-sm hover:shadow-md transition-all flex items-center gap-5">
           <FaUsers className="text-4xl text-indigo-600" />
           <div>
@@ -35,7 +35,7 @@ const Dashboard = ({ total, recent, active }) => {
       </div>
 
       {/* Recent Clients Table */}
-      <div className="bg-white rounded-2xl shadow p-6">
+      <div className="bg-blue-50 rounded-2xl shadow p-6">
         <h2 className="text-lg font-semibold text-slate-800 mb-4">
           Recent Clients
         </h2>
@@ -81,10 +81,15 @@ const Dashboard = ({ total, recent, active }) => {
       </div>
 
       {/* Tag Distribution Chart */}
-      <div className="bg-white rounded-2xl shadow p-6">
-        <h2 className="text-lg font-semibold text-slate-800 mb-4">
-          Client Tags Overview
+      <div className="bg-blue-50 rounded-2xl shadow p-6">
+        <h2 className="text-lg font-semibold text-slate-800 mb-1">
+          Tag Insights – See Where Your Efforts Are Paying Off
         </h2>
+        <p className="text-sm text-slate-500">
+          Get a quick snapshot of client segmentation to fine-tune your
+          campaigns and services.
+        </p>
+
         <TagChart />
       </div>
     </div>

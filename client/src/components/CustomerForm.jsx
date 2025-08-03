@@ -1,36 +1,23 @@
+import React from "react";
 
-import { useState, useEffect } from "react";
-
-const CustomerForm = ({form,setForm, editing,TagOptions, setModal,resetForm,handleSubmit})=> {
-//   const [form, setForm] = useState({ name: "", email: "", status: "Active" });
-
-//   useEffect(() => {
-//     if (existing) {
-//       setForm(existing);
-//     }
-//   }, [existing]);
-
-//   const handleChange = (e) => {
-//     setForm({ ...form, [e.target.name]: e.target.value });
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     if (form.name && form.email) {
-//       onSave(form);
-//     }
-//   };
-
-
-
-
-
+const CustomerForm = ({
+  form,
+  setForm,
+  editing,
+  TagOptions,
+  setModal,
+  resetForm,
+  handleSubmit,
+}) => {
   return (
     <div>
+        {/* Form Header */}
       <div className="bg-white p-6 rounded w-full max-w-md">
         <h2 className="text-xl font-semibold mb-4">
           {editing !== null ? "Edit Customer" : "Add Customer"}
         </h2>
+
+        {/* Create/Edit Customer Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium mb-1">Name</label>
@@ -122,7 +109,6 @@ const CustomerForm = ({form,setForm, editing,TagOptions, setModal,resetForm,hand
       </div>
     </div>
   );
-}
+};
 
-
-export default CustomerForm; 
+export default CustomerForm;

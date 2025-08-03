@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  FaBars,
-  FaTimes,
-} from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 import Customers from "../dashboard/Customers";
 import CalendarView from "../dashboard/Calendar";
@@ -88,7 +85,7 @@ const Home = () => {
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col ml-0 md:ml-64 overflow-auto">
-        {/* Header */}
+        {/* DashPage Header */}
         <header className="bg-white shadow-sm px-6 py-4 flex items-center justify-between sticky top-0 z-10 border-b">
           <h2 className="text-xl font-semibold capitalize text-gray-800">
             {activePage === "dashboard"
@@ -107,13 +104,10 @@ const Home = () => {
           </button>
         </header>
 
-        {/* Page Content */}
+        {/* DashPage Content */}
         <main className="p-6 space-y-8">
           {activePage === "dashboard" && (
-            <>
-              <Dashboard recent={recent} active={active} total={total} />
-              {/* <ChartSection /> */}
-            </>
+            <Dashboard recent={recent} active={active} total={total} />
           )}
           {activePage === "customers" && <Customers />}
           {activePage === "calendar" && <CalendarView />}

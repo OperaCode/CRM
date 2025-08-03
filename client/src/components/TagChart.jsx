@@ -51,7 +51,7 @@ const TagChart = () => {
         
         <button
           onClick={() => setChartType(chartType === "bar" ? "pie" : "bar")}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transitiontext-sm transition"
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transitiontext-sm transition font-bold cursor-pointer"
         >
           Switch to {chartType === "bar" ? "Pie" : "Bar"} Chart
         </button>
