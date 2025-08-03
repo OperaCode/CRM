@@ -20,7 +20,7 @@ const COLORS = [
 
 const TagChart = () => {
   const [chartData, setChartData] = useState([]);
-  const [chartType, setChartType] = useState("bar"); // "bar" or "pie"
+  const [chartType, setChartType] = useState("bar"); 
 
   useEffect(() => {
     const raw = localStorage.getItem("crm-customers");
@@ -46,7 +46,7 @@ const TagChart = () => {
   }, []);
 
   return (
-    <div className="bg-white p-6 mt-6 rounded-2xl shadow-md">
+    <div className="bg-blue-50 p-6 mt-6 rounded-2xl shadow-md">
       <div className="flex justify-end items-center mb-4">
         
         <button
@@ -60,6 +60,7 @@ const TagChart = () => {
       {chartData.length === 0 ? (
         <p className="text-gray-500 text-sm">No tag data available yet.</p>
       ) : chartType === "bar" ? (
+        // Render data into BarChart
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={chartData}>
             <XAxis dataKey="tag" stroke="#8884d8" />
@@ -69,6 +70,7 @@ const TagChart = () => {
           </BarChart>
         </ResponsiveContainer>
       ) : (
+        // Render data into PieChart
         <ResponsiveContainer width="100%" height={300}>
           <PieChart>
             <Pie

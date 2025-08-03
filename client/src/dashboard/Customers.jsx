@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import CustomerForm from "../components/CustomerForm";
 import CustomerTable from "../components/CustomerTable";
 
-const TagOptions = ["VIP", "Prospect", "Follow-up", "Unsubscribed"];
+const TagOptions = [ "Platinum","VIP", "Regular", "Follow-up"];
 const initialCustomers = [];
 
 const Customers = () => {

@@ -9,12 +9,12 @@ const CalendarView = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [tasks, setTasks] = useState([]);
   const [users, setUsers] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [newTask, setNewTask] = useState({ userId: "", name: "" });
 
-  // Load tasks and users
   useEffect(() => {
     const storedTasks = localStorage.getItem("crm-tasks");
     const storedUsers = localStorage.getItem("crm-customers");
-
     if (storedTasks) setTasks(JSON.parse(storedTasks));
     if (storedUsers) setUsers(JSON.parse(storedUsers));
   }, []);
@@ -29,40 +29,35 @@ const CalendarView = () => {
       toast.error("No registered clients available.");
       return;
     }
+    setNewTask({ userId: users[0].id, name: "" });
+    setShowModal(true);
+  };
 
-    const userOptions = users
-      .map((user, idx) => `${idx + 1}. ${user.name}`)
-      .join("\n");
-    const selection = prompt(`Select a client:\n${userOptions}`);
-
-    const index = parseInt(selection) - 1;
-    if (isNaN(index) || !users[index]) {
-      alert("Invalid client selected.");
+  const handleModalSubmit = () => {
+    if (!newTask.name.trim()) {
+      toast.error("Task name is required.");
       return;
     }
 
-    const taskName = prompt("Enter task/follow-up:");
-    if (!taskName) return;
-
-    const newTask = {
+    const selectedUser = users.find((u) => u.id === newTask.userId);
+    const newFollowUp = {
       id: Date.now(),
-      userId: users[index].id,
-      userName: users[index].name,
-      name: taskName,
+      userId: newTask.userId,
+      userName: selectedUser?.name,
+      name: newTask.name.trim(),
       date: selectedDate.toISOString(),
     };
 
-    const updatedTasks = [...tasks, newTask];
+    const updatedTasks = [...tasks, newFollowUp];
     saveTasks(updatedTasks);
-    toast.success("Follow-up added successfully!");
+    toast.success("Follow-up added!");
+    setShowModal(false);
   };
 
   const tileContent = ({ date }) => {
     const dayTasks = tasks.filter(
-      (task) =>
-        format(new Date(task.date), "yyyy-MM-dd") === format(date, "yyyy-MM-dd")
+      (task) => format(new Date(task.date), "yyyy-MM-dd") === format(date, "yyyy-MM-dd")
     );
-
     return dayTasks.length > 0 ? (
       <ul className="text-[10px] text-green-600 px-1 space-y-1">
         {dayTasks.slice(0, 2).map((task, i) => (
@@ -74,9 +69,7 @@ const CalendarView = () => {
   };
 
   const selectedDateTasks = tasks.filter(
-    (task) =>
-      format(new Date(task.date), "yyyy-MM-dd") ===
-      format(selectedDate, "yyyy-MM-dd")
+    (task) => format(new Date(task.date), "yyyy-MM-dd") === format(selectedDate, "yyyy-MM-dd")
   );
 
   return (
@@ -93,12 +86,12 @@ const CalendarView = () => {
         </button>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8">
+      <div className="md:flex justify-between gap-8">
         <Calendar
           value={selectedDate}
           onChange={setSelectedDate}
           tileContent={tileContent}
-          className="rounded border shadow"
+          className="rounded border shadow flex-1"
         />
 
         <div className="border-l pl-6">
@@ -107,9 +100,7 @@ const CalendarView = () => {
           </h4>
 
           {selectedDateTasks.length === 0 ? (
-            <p className="text-gray-500 text-sm italic">
-              No follow-ups for this day.
-            </p>
+            <p className="text-gray-500 text-sm italic">No follow-ups for this day.</p>
           ) : (
             <ul className="space-y-2">
               {selectedDateTasks.map((task) => (
@@ -118,15 +109,59 @@ const CalendarView = () => {
                   className="bg-blue-50 border border-blue-200 p-3 rounded-md shadow-sm"
                 >
                   <div className="font-medium text-blue-700">{task.name}</div>
-                  <div className="text-xs text-gray-500">
-                    For: {task.userName}
-                  </div>
+                  <div className="text-xs text-gray-500">For: {task.userName}</div>
                 </li>
               ))}
             </ul>
           )}
         </div>
       </div>
+
+      {/* Modal for adding follow-up */}
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
+          <div className="bg-white rounded-xl p-6 w-full max-w-md shadow-xl">
+            <h3 className="text-lg font-semibold mb-4 text-blue-700">Add Follow-Up</h3>
+
+            <label className="block mb-2 text-sm font-medium">Select Client:</label>
+            <select
+              value={newTask.userId}
+              onChange={(e) => setNewTask({ ...newTask, userId: e.target.value })}
+              className="w-full border rounded px-3 py-2 mb-4"
+            >
+              {users.map((user) => (
+                <option key={user.id} value={user.id}>
+                  {user.name}
+                </option>
+              ))}
+            </select>
+
+            <label className="block mb-2 text-sm font-medium">Task Name:</label>
+            <input
+              type="text"
+              value={newTask.name}
+              onChange={(e) => setNewTask({ ...newTask, name: e.target.value })}
+              placeholder="e.g. Call client for feedback"
+              className="w-full border rounded px-3 py-2 mb-4"
+            />
+
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => setShowModal(false)}
+                className="px-4 py-2 text-sm rounded bg-gray-300 hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleModalSubmit}
+                className="px-4 py-2 text-sm rounded bg-blue-600 text-white hover:bg-blue-700"
+              >
+                Add Task
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
