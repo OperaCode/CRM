@@ -55,9 +55,9 @@ const Landing = () => {
             ClientCore
           </Link>
           <nav className="hidden md:flex gap-6 items-center">
-            <a href="#top" className="text-gray-700 hover:text-blue-600">Home</a>
-            <a href="#features" className="text-gray-700 hover:text-blue-600">Features</a>
-            <a href="#faq" className="text-gray-700 hover:text-blue-600">FAQ</a>
+            <a href="#top" className="font-bold text-gray-700 hover:text-blue-600">Home</a>
+            <a href="#features" className="font-bold text-gray-700 hover:text-blue-600">Features</a>
+            <a href="#faq" className="font-bold text-gray-700 hover:text-blue-600">FAQ</a>
           </nav>
           <Link
             to="/dashboard"

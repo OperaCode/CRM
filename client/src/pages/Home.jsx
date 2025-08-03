@@ -38,7 +38,7 @@ const Home = () => {
         <nav className="flex flex-col gap-4 text-sm font-medium">
           <button
             onClick={() => setActivePage("dashboard")}
-            className={`text-left rounded px-2 py-1 transition-all ${
+            className={`text-left rounded px-2 py-1 transition-all cursor-pointer font-bold ${
               activePage === "dashboard"
                 ? "bg-white text-gray-900"
                 : "hover:text-blue-400"
@@ -48,7 +48,7 @@ const Home = () => {
           </button>
           <button
             onClick={() => setActivePage("customers")}
-            className={`text-left rounded px-2 py-1 transition-all ${
+            className={`text-left rounded px-2 py-1 transition-all cursor-pointer font-bold ${
               activePage === "customers"
                 ? "bg-white text-gray-900"
                 : "hover:text-blue-400"
@@ -58,7 +58,7 @@ const Home = () => {
           </button>
           <button
             onClick={() => setActivePage("calendar")}
-            className={`text-left rounded px-2 py-1 transition-all ${
+            className={`text-left rounded px-2 py-1 transition-all cursor-pointer font-bold ${
               activePage === "calendar"
                 ? "bg-white text-gray-900"
                 : "hover:text-blue-400"
