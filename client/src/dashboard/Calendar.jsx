@@ -2,20 +2,25 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
-
-const CalendarPage = () => {
+import { toast } from "react-toastify";
+const CalendarView = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [tasks, setTasks] = useState([]);
+  const [users, setUsers] = useState([]);
 
-  // Load from localStorage
+  // Load tasks and users from localStorage
   useEffect(() => {
     const storedTasks = localStorage.getItem("crm-tasks");
+    const storedUsers = localStorage.getItem("crm-customers");
+
     if (storedTasks) {
       setTasks(JSON.parse(storedTasks));
     }
+    if (storedUsers) {
+      setUsers(JSON.parse(storedUsers));
+    }
   }, []);
 
-  // Save to localStorage
   const saveTasks = (newTasks) => {
     setTasks(newTasks);
     localStorage.setItem("crm-tasks", JSON.stringify(newTasks));
@@ -23,12 +28,30 @@ const CalendarPage = () => {
 
   // Add new follow-up task
   const handleAddFollowUp = () => {
-    const name = prompt("Enter customer/task name:");
-    if (!name) return;
+    if (users.length === 0) {
+      toast.error("No registered client found.");
+      return;
+    }
+
+    const userOptions = users
+      .map((user, idx) => `${idx + 1}. ${user.name}`)
+      .join("\n");
+    const selection = prompt(`Select a user:\n${userOptions}`);
+
+    const index = parseInt(selection) - 1;
+    if (isNaN(index) || !users[index]) {
+      alert("Invalid user selected.");
+      return;
+    }
+
+    const taskName = prompt("Enter task/follow-up:");
+    if (!taskName) return;
 
     const newTask = {
       id: Date.now(),
-      name,
+      userId: users[index].id,
+      userName: users[index].name,
+      name: taskName,
       date: selectedDate.toISOString(),
     };
 
@@ -46,7 +69,7 @@ const CalendarPage = () => {
     return hasTasks.length > 0 ? (
       <ul className="text-[10px] text-green-600 px-1">
         {hasTasks.map((task, i) => (
-          <li key={i}>📌 {task.name}</li>
+          <li key={i}>📌 {task.name} ({task.userName})</li>
         ))}
       </ul>
     ) : null;
@@ -73,4 +96,4 @@ const CalendarPage = () => {
   );
 };
 
-export default CalendarPage;
+export default CalendarView;
