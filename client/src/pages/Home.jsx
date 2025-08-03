@@ -6,11 +6,13 @@ import {
   FaBars,
   FaTimes,
 } from "react-icons/fa";
-import Customers from "./Customers";
+import Customers from "../dashboard/Customers";
+import Calendar from "react-calendar";
+import Dashboard from "../dashboard/Dashboard";
 
 const Home = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [activePage, setActivePage] = useState("dashboard"); // "dashboard" or "customers"
+  const [activePage, setActivePage] = useState("dashboard");
   const [customers, setCustomers] = useState([]);
 
   useEffect(() => {
@@ -55,7 +57,15 @@ const Home = () => {
           >
             👥 Customers
           </button>
-          <button className="text-left hover:text-blue-400">📆 Calendar</button>
+          <button
+            onClick={() => setActivePage("calendar")}
+            className={`text-left hover:text-blue-400 ${
+              activePage === "calendar" ? "text-blue-400 font-semibold" : ""
+            }`}
+          >
+            📆 Calendar
+          </button>
+          {/* <button className="text-left hover:text-blue-400"></button> */}
         </nav>
       </aside>
 
@@ -84,7 +94,7 @@ const Home = () => {
           {activePage === "dashboard" && (
             <>
               {/* Stats */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div className="bg-white p-4 rounded-xl shadow flex items-center gap-4">
                   <FaUsers className="text-3xl text-blue-600" />
                   <div>
@@ -108,13 +118,11 @@ const Home = () => {
                     </p>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* Recent Customers */}
-              <div className="bg-white p-6 rounded-xl shadow">
-                <h4 className="text-lg font-semibold mb-4">
-                  Recent Customers
-                </h4>
+              {/* <div className="bg-white p-6 rounded-xl shadow">
+                <h4 className="text-lg font-semibold mb-4">Recent Customers</h4>
                 {recent.length === 0 ? (
                   <p className="text-gray-500 text-sm">
                     No recent customers found.
@@ -149,11 +157,16 @@ const Home = () => {
                     </table>
                   </div>
                 )}
-              </div>
+              </div> */}
+
+              <Dashboard recent={recent} active={active} total={total}/>
+
+
             </>
           )}
 
           {activePage === "customers" && <Customers />}
+          {activePage === "calendar" && <Calendar />}
         </main>
       </div>
     </div>
