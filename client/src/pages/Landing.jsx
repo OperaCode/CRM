@@ -35,7 +35,7 @@ const Landing = () => {
       answer: "Yes, the task manager lets you create and assign follow-ups to existing contacts easily.",
     },
     {
-      question: "Is CoreCRM mobile-friendly?",
+      question: "Is ClientCore mobile-friendly?",
       answer: "Absolutely! The interface is responsive and works well on mobile, tablet, and desktop devices.",
     },
   ];
@@ -52,7 +52,7 @@ const Landing = () => {
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="text-xl font-bold text-blue-600">
-            CoreCRM
+            ClientCore
           </Link>
           <nav className="hidden md:flex gap-6 items-center">
             <a href="#top" className="text-gray-700 hover:text-blue-600">Home</a>
@@ -71,7 +71,7 @@ const Landing = () => {
       {/* Hero Section */}
       <section id="top" className="bg-blue-50 text-center py-24 px-6">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          CoreCRM for Growing Teams
+          ClientCore for Growing Businesses
         </h1>
         <p className="text-gray-600 max-w-2xl mx-auto mb-6">
           Manage your contacts, track tasks, and grow your customer base with ease.
@@ -86,7 +86,7 @@ const Landing = () => {
 
       {/* Features Section */}
       <section id="features" className="py-20 bg-gray-100 px-6">
-        <h2 className="text-3xl font-bold text-center mb-12">Why CoreCRM?</h2>
+        <h2 className="text-3xl font-bold text-center mb-12">Why ClientCore?</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {features.map((feature, index) => (
             <div
@@ -144,7 +144,7 @@ const Landing = () => {
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white text-center py-6 text-sm">
-        <p>© {new Date().getFullYear()} CoreCRM. Built for simplicity.</p>
+        <p>© {new Date().getFullYear()} ClientCore. Built for simplicity.</p>
       </footer>
     </div>
   );
